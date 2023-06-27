@@ -3,11 +3,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 const Add = () => {
-    
+
     const [nom , setnom] = useState('');
     const [email , setemail] = useState('');
     const [age , setage] = useState(0);
-    const [err , seterr] = useState({})
+    const [err , seterr] = useState({});
     const navigate = useNavigate() ;
 
     const med = useDispatch();
@@ -17,54 +17,29 @@ const Add = () => {
     const handlersubmutt = (e) => {
         e.preventDefault() ;
 
+        let errors  = {}
+
         if(nom.length < 3) {
-           return seterr({...err , nom : "khas ldine mok ykoune smaytk kbira 3la 3 ya wjah l kalb"})
-        }else{
-            console.log(1);
-            seterr({...err , nom : "drgregeg"})
+           errors.nom = "dair 3 l7ourf"
         }
 
         if (!email.includes("@")){
-            return seterr({...err , email : "khas ldine mok ykoune niichaaaane ya wjah l kalb"})
+            errors.email = "dair @"
         }
-        else{
-            const updatestatee = {...err} ;
-             updatestatee.email = null
-            seterr(updatestatee)
-        }
-
 
         if(+age < 18 || +age > 35){
-            return seterr({...err , age : "khas ldine mok ykoune niichaaaane ya wjah l kalb"})
-        }
-        else{
-            const updatestatee = {...err} ;
-             updatestatee.age = null
-            seterr(updatestatee)
+            errors.age = "dezfzf eer"
         }
 
-       
+        seterr(errors)
 
-        if(Object.keys(err).length == 0){
+        if(Object.keys(errors).length === 0){
             med({type : "ADD"  , taha : { id : data.length + 1  , nom , email , age}})
             navigate('/')
         }
 
-        
-        
-
-
-
-
-
-
     }
 
-    
-
-    useEffect(() => {
-        console.log(err);
-    }, [err]);
 
     return (
         <div>

@@ -1,4 +1,4 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 
@@ -6,6 +6,8 @@ import { Link } from "react-router-dom";
 const List = () => {
 
     const taha =  useSelector(state => state ) ;
+
+    const dispatch = useDispatch() ;
 
     return(
         <div>
@@ -30,8 +32,8 @@ const List = () => {
                                     <td>{item.email}</td>
                                     <td>{item.age}</td>
                                     <td>
-                                            <button>delete</button>
-                                            <button>update</button>
+                                            <button onClick={() => dispatch({type:"DELETE" , idDELETE : item.id})}>delete</button>
+                                            <Link to={'/update/'+item.id}><button >update</button></Link> 
                                     </td>
                                 </tr>
 
